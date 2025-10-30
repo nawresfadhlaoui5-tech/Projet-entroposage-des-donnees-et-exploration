@@ -16,9 +16,9 @@ Solution : normalisation/parseurs, nettoyage d’encodage.
 Solution : schéma cible, mappings, ETL, transformation, ontologies pour exposer une structure commune.
 
 **.Hétérogénéité sémantique**
-— divergence de sens/vocabulaire : synonymes (client vs customer), homonymes, différences de granularité (ville vs métropole), unités (m, ft).
+— divergence de sens/vocabulaire : synonymes (client vs customer), homonymes, différences de granularité (ville vs métropole),
+ unités (m, ft).
 **Solution:** ontologies, dictionnaires, alignement sémantique, normalisation d’unités.
-
 **.Autres:** hétérogénéité de qualité (valeurs manquantes / bruit), temporelle (différences dans le temps), et de provenance (confiance/source).
 
 ### **3) En tenir compte pour une intégration Web sémantique:** 
@@ -36,13 +36,14 @@ Solution : schéma cible, mappings, ETL, transformation, ontologies pour exposer
 
 **.RDF (triplets sujet-predicat-objet) :** modèle flexible qui représente n’importe quelle relation, facilitant l’uniformisation des structures hétérogènes en graphes alignés.
 
-**.Ontologies (OWL, SKOS) :** définissent concepts, relations, contraintes et axiomes (subClassOf, domain/range, équivalence), permettant :
+**.Ontologies (OWL, SKOS) :** définissent concepts, relations, contraintes et axiomes (subClassOf, domain/range, équivalence),
+permettant :
 
-    .normalisation des vocabulaires (synonymes, équivalences),
+    .La normalisation des vocabulaires (synonymes, équivalences),
 
-    .validation (contrainte de cardinalité),
+    .La validation (contrainte de cardinalité),
 
-    .enrichissement par inférence (raisonneurs OWL).
+    .L'enrichissement par inférence (raisonneurs OWL).
 
 **.SPARQL :** requêtes fédérées sur sources RDF, indépendantes du schéma physique.
 
