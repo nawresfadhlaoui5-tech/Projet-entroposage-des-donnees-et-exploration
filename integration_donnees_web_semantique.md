@@ -1,4 +1,4 @@
-**1) Définition de l'hétérogénité des données dans l’intégration :**
+### **1) Définition de l'hétérogénité des données dans l’intégration :**
 
 L’hétérogénéité est l'ensemble des différences et incompatibilités entre sources de données qui empêchent leur fusion directe.  
 Elle se manifeste à plusieurs niveaux (format, vocabulaire, granularité, représentation, qualité, etc.) et complique les requêtes, analyses et raisonnements inter-sources.
@@ -21,7 +21,7 @@ Solution : ontologies, dictionnaires, alignement sémantique, normalisation d’
 
 .Autres : hétérogénéité de qualité (valeurs manquantes / bruit), temporelle (différences dans le temps), et de provenance (confiance/source).
 
-**3) En tenir compte pour une intégration Web sémantique:** 
+### **3) En tenir compte pour une intégration Web sémantique:** 
 
 .Pour préserver le sens lors de l’agrégation (éviter mauvaises correspondances).
 
