@@ -6,7 +6,7 @@ Elle se manifeste à plusieurs niveaux (format, vocabulaire, granularité, repr�
 
 ### **2) Types d’hétérogénéités (structurale, syntaxique, sémantique)**
 
-.Hétérogénéité syntaxique
+**.Hétérogénéité syntaxique:**
 — différences de format ou d’encodage (CSV vs JSON vs XML, encodage UTF-8 vs ISO-8859-1).
 Solution : normalisation/parseurs, nettoyage d’encodage.
 
@@ -17,9 +17,9 @@ Solution : schéma cible, mappings, ETL, transformation, ontologies pour exposer
 
 **.Hétérogénéité sémantique**
 — divergence de sens/vocabulaire : synonymes (client vs customer), homonymes, différences de granularité (ville vs métropole), unités (m, ft).
-Solution : ontologies, dictionnaires, alignement sémantique, normalisation d’unités.
+**Solution:** ontologies, dictionnaires, alignement sémantique, normalisation d’unités.
 
-.Autres : hétérogénéité de qualité (valeurs manquantes / bruit), temporelle (différences dans le temps), et de provenance (confiance/source).
+**.Autres:** hétérogénéité de qualité (valeurs manquantes / bruit), temporelle (différences dans le temps), et de provenance (confiance/source).
 
 ### **3) En tenir compte pour une intégration Web sémantique:** 
 
