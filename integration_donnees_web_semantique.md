@@ -1,167 +1,130 @@
-### **1) Définition de l'hétérogénité des données dans l’intégration :**
+### 1) Définition de l'hétérogénéité des données dans l’intégration
 
 L’hétérogénéité est l'ensemble des différences et incompatibilités entre sources de données qui empêchent leur fusion directe.  
 Elle se manifeste à plusieurs niveaux (format, vocabulaire, granularité, représentation, qualité, etc.) et complique les requêtes, analyses et raisonnements inter-sources.
 
+### 2) Types d’hétérogénéités (structurale, syntaxique, sémantique)
 
-### **2) Types d’hétérogénéités (structurale, syntaxique, sémantique):**
+**Hétérogénéité syntaxique**  
+- Différences de format ou d’encodage (CSV vs JSON vs XML, UTF-8 vs ISO-8859-1)  
+- **Solution :** normalisation/parseurs, nettoyage d’encodage
 
-**.Hétérogénéité syntaxique:**
-— différences de format ou d’encodage (CSV vs JSON vs XML, encodage UTF-8 vs ISO-8859-1).
-Solution : normalisation/parseurs, nettoyage d’encodage.
+**Hétérogénéité structurale (ou schématique)**  
+- Mêmes informations stockées selon des modèles différents (colonne `date_naissance` vs `dob`; relation imbriquée vs table séparée)  
+- **Solution :** schéma cible, mappings, ETL, transformation, ontologies pour exposer une structure commune
 
-**.Hétérogénéité structurale (ou schématique):**
+**Hétérogénéité sémantique**  
+- Divergence de sens/vocabulaire : synonymes (`client` vs `customer`), homonymes, différences de granularité (ville vs métropole), unités (m vs ft)  
+- **Solution :** ontologies, dictionnaires, alignement sémantique, normalisation d’unités
 
-— mêmes informations stockées selon des modèles différents (colonne date_naissance vs dob ; relation imbriquée vs table séparée).
-Solution : schéma cible, mappings, ETL, transformation, ontologies pour exposer une structure commune.
+**Autres types**  
+- Qualité : valeurs manquantes / bruit  
+- Temporelle : différences dans le temps  
+- Provenance : confiance/source
 
-**.Hétérogénéité sémantique**
-— divergence de sens/vocabulaire : synonymes (client vs customer), homonymes, différences de granularité (ville vs métropole),
- unités (m, ft).
-**Solution:** ontologies, dictionnaires, alignement sémantique, normalisation d’unités.
-**.Autres:** hétérogénéité de qualité (valeurs manquantes / bruit), temporelle (différences dans le temps), et de provenance (confiance/source).
+### 3) Importance de la prise en compte de l’hétérogénéité pour le Web sémantique
 
-### **3) En tenir compte pour une intégration Web sémantique:** 
+- Préserver le sens lors de l’agrégation (éviter mauvaises correspondances)  
+- Rendre les données interopérables entre applications et équipes  
+- Permettre un raisonnement automatique (les moteurs logiques ont besoin d’un sens partagé)  
+- Assurer qualité et traçabilité (provenance, confiance)  
 
-.Pour préserver le sens lors de l’agrégation (éviter mauvaises correspondances).
+> Ignorer l’hétérogénéité conduit à des erreurs d’analyse, doublons ou décisions erronées.
 
-.Pour rendre les données interopérables entre applications et équipes.
+### 4) Comment RDF / ontologies aident à réduire les incohérences
 
-.Pour permettre un raisonnement automatique (les moteurs logiques ont besoin d’un sens partagé).
+**RDF (triplets sujet-prédicat-objet)**  
+- Modèle flexible représentant n’importe quelle relation, facilitant l’uniformisation des structures hétérogènes en graphes alignés  
 
-.Pour assurer qualité et traçabilité (provenance, confiance).
-.Ignorer l’hétérogénéité conduit à des erreurs d’analyse, doublons, ou décisions erronées.
+**Ontologies (OWL, SKOS)**  
+- Définissent concepts, relations, contraintes et axiomes (`subClassOf`, `domain/range`, équivalence)  
+- **Avantages :**  
+  - Normalisation des vocabulaires (synonymes, équivalences)  
+  - Validation (contraintes de cardinalité)  
+  - Enrichissement par inférence (raisonneurs OWL)  
 
-### **4) Comment RDF / ontologies aident à réduire incohérences et harmoniser:**
+**SPARQL**  
+- Requêtes fédérées sur sources RDF, indépendantes du schéma physique  
 
-**.RDF (triplets sujet-predicat-objet) :** modèle flexible qui représente n’importe quelle relation, facilitant l’uniformisation des structures hétérogènes en graphes alignés.
+**Provenance (PROV) et métadonnées**  
+- Conservent origine et confiance  
 
-**.Ontologies (OWL, SKOS) :** définissent concepts, relations, contraintes et axiomes (subClassOf, domain/range, équivalence),
-permettant :
+> Pratique : construire un modèle de référence (ontology/vocabulary), mapper/transformer les sources vers RDF et appliquer alignement + raisonnement.
 
-    .La normalisation des vocabulaires (synonymes, équivalences),
+### 5) Rôle d’un Knowledge Graph (KG)
 
-    .La validation (contrainte de cardinalité),
+- **Modèle unificateur :** rassemble entités et relations de sources différentes dans un graphe connecté  
+- **Désambiguïsation / fusion d’entités :** identifie et unifie les mentions d’un même objet  
+- **Support du raisonnement :** inférences structurelles et logiques via ontologies et règles  
+- **Richesse contextuelle :** attributs, provenance, temporalité, confiance  
+- **Interface pour applications :** recherche, QA, analyse graphique, pipelines Machine Learning  
 
-    .L'enrichissement par inférence (raisonneurs OWL).
+> Le KG agit comme une couche sémantique entre données brutes et usages, facilitant intégration, cohérence et exploitation intelligente.
 
-**.SPARQL :** requêtes fédérées sur sources RDF, indépendantes du schéma physique.
+### 6) Pourquoi le format graphe facilite exploration & raisonnement vs bases relationnelles
 
-**.Provenance (PROV) et métadonnées :** aident à conserver origine et confiance.
-→ En pratique on construit un modèle de référence (ontology / vocabulary), on mappe/transforme les sources vers RDF et on applique alignement et raisonnement.
+- **Flexibilité de schéma :** ajout simple de nouveaux types de nœuds/relations  
+- **Requêtes relationnelles profondes :** parcours multi-sauts natifs et efficaces  
+- **Représentation naturelle des réseaux :** mieux adapté à réseaux sociaux, chaînes d’approvisionnement, ontologies  
+- **Raisonnement logique :** axiomes OWL/RDFS et règles intégrés pour inférences  
+- **Interopérabilité & Linked Data :** URI globales pour entités, liens externes (`sameAs`, `owl:sameAs`)  
 
-###  **5) Rôle d’un Knowledge Graph (KG) dans la gestion et la représentation des données intégrées:**
-Un Knowledge Graph (KG) est un graphe représentant des entités et leurs relations, où nœuds et liens peuvent contenir des propriétés ou métadonnées.Ces principales roles sont:
+> Remarque : SGBD relationnels restent meilleurs pour transactions massives et agrégations numériques.
 
-**.Modèle unificateur :** rassemble les entités et les  relations provenant de sources différentes dans un graphe connecté.
+### 7) Contribution des KGs aux applications d’apprentissage automatique
 
-**.Désambiguïsation / fusion d’entités (entity resolution) :** identifie et unifie les mentions différentes d’un même objet (entity resolution)..
+- Enrichissement de features : propriétés et voisinages comme features (embeddings de KG)  
+- Meilleure contextualisation : relations explicites pour désambiguïsation (ex: « Apple » fruit vs entreprise)  
+- Transfert de connaissances : KG fournit connaissances structurées exploitables par modèles statistiques  
+- Amélioration du rappel/pertinence : recherche, recommandation, QA  
+- Support pour modèles symboliques/neuromorphes : hybridation règles + réseaux  
 
-**.Support du raisonnement :** inférences structurelles et logiques (via ontologies, règles).
+> Exemples : KG embeddings (TransE, ComplEx), GNNs sur KG, features pour classifieurs
 
-**.Richesse contextuelle :** stocke attributs, provenance, temporalité, confiance.
+### 8) Manières d’utiliser les LLM pour enrichir / interagir avec un KG
 
-**.Interface pour applications :**sert de couche sémantique pour la recherche, le question-answering, l’analyse graphique et les pipelines Machine Learning.
+- Extraction d’information : NER / relation extraction depuis texte → nouvelles entités/relations ajoutées au KG  
+- Normalisation et mapping : LLM pour labels, mapping vers classes d’ontologie  
+- Complétion de KG : génération de triples candidats puis validation  
+- Question-Answering : LLM interroge KG via SPARQL ou combine KG + contexte  
+- Reformulation de requêtes : transformer questions utilisateurs en SPARQL  
+- Explication & naturalisation : produire explications humaines pour relations extraites  
+- Embeddings hybrides : combiner embeddings textuels LLM et embeddings structurels KG
 
-→ le KG agit comme une couche sémantique entre données brutes et usages, facilitant intégration, cohérence et exploitation intelligente.
+### 9) Défis de l’usage conjoint KG + LLM
 
-### **6) Pourquoi le format graphe facilite exploration & raisonnement vs bases relationnelles classiques:**
+- Biais / hallucinations du LLM → génération de faits non vérifiés  
+- Contrôle de qualité & vérifiabilité → validation automatique des triples  
+- Alignement vocabulaire/ontologie  
+- Scalabilité : maintenir KG massifs et requêtes temps réel avec LLM coûteux  
+- Sécurité / confidentialité  
+- Interprétabilité : décisions LLM vs axiomes explicites du KG  
+- Boucle de rétroaction : risque d’amplification d’erreurs
 
-**.Flexibilité de schéma :** ajout simple de nouveaux types de nœuds/relations sans remodeler tout le schéma relationnel.
+### 10) Comment les LLM aident à identifier/corriger/compléter des données manquantes/ambiguës
 
-**.Requêtes relationnelles profondes :** parcours multi-sauts (chemins, voisinage) natifs et efficaces.
-
-**.Représentation naturelle des réseaux (relations multiples, hypergraphes approximés) :** mieux adapté à réseaux sociaux, chaînes d’approvisionnement, ontologies.
-
-**.Raisonnement logique :** intégration directe d’axiomes OWL/RDFS et règles, permettant inférences sur topologie.
-
-**.Interopérabilité & Linked Data :** URI globales pour entités, facilitant liens externes (sameAs, owl:sameAs).
-→ En revanche, les SGBD relationnels restent meilleurs pour transactions massives et agrégations numériques; souvent on combine les deux.
-
-### **7) Contribution des KGs aux applications d’apprentissage automatique:**
-
-**.Enrichissement de features :** propriétés et voisinages comme features (embeddings de KG).
-
-**.Meilleure contextualisation :** relations explicites permettent désambiguïsation (ex : « Apple » fruit vs entreprise).
-
-**.Transfert de connaissances :** KG fournit connaissances structurées non triviales que modèles statistiques exploitent.
-
-**.Amélioration du rappel/pertinence dans recherche, recommandation et QA.**
-
-**.Support pour modèles symboliques/neuromorphes :** hybridation symbolique–neuronale (ex : règles + réseaux).
-  Exemples : KG embeddings (TransE, ComplEx), GNNs sur KG pour prédiction de liens, et features pour classifieurs.
-
-### **8) Manières d’utiliser les LLM pour enrichir / interagir avec un KG:**
-
-**.Extraction d’information :** NER/relation extraction depuis texte -> nouvelles entités/relations ajoutées au KG.
-
-**.Normalisation et mapping :** LLM pour normaliser labels, mapper termes non standard aux classes d’une ontologie.
-
-**.Complétion de KG :** génération de triples candidats (zone hypothétique) puis validation.
-
-**.Question-Answering (QA) :** LLM interroge le KG (via SPARQL) ou combine KG + contexte pour répondre.
-
-**.Reformulation de requêtes :** transformer une question utilisateur en requête SPARQL.
-
-**.Explication & Naturalisation:** produire explications humaines pour relations extraites.
-
-**.Embeddings hybrides:** combiner embeddings textuels LLM et embeddings structurels KG pour alignement entité-texte.
-
-### **9) Défis spécifiques à l’usage conjoint KG + LLM:**
-
-**.Biais / hallucinations du LLM:** génération de faits non vérifiés qui, si ingérés, polluent le KG.
-
-**.Contrôle de qualité & vérifiabilité:** comment valider automatiquement des triples produits par LLM ? (provenance + score de confiance nécessaires).
-
-**.Alignement vocabulaire/ontologie:** LLM peut proposer termes non alignés aux vocabulaires existants.
-
-**.Scalabilité:** maintenir KG massifs et requêtes temps réel tout en appelant LLM coûteux.
-
-**.Sécurité / confidentialité:** fuite d’information si LLM est utilisé sur données sensibles.
-
-**.Interprétabilité:** décisions du LLM peu transparentes vs axiomes explicites du KG.
-
-**.Boucle de rétroaction:** risque d’amplification d’erreurs si LLM s’entraîne sur données enrichies qu’il a lui-même produites.
-
-### **10) Comment les LLM peuvent aider à identifier, corriger, compléter des données manquantes/ambiguës:**
-
-**.Suggestion d’entités/valeurs manquantes:** en fournissant contexte, LLM propose valeurs plausibles (avec score).
-
-**.Désambiguïsation contextuelle:** LLM peut décider quel sens d’un mot est pertinent selon contexte local et proposer lien vers entité KG.
-
-**.Fuzzy matching & canonicalisation:** rapprocher variantes textuelles (abbrev., fautes) vers une forme canonique.
-
-**.Génération d’attributs dérivés:** calculer/extraire des descriptions, résumés, catégories.
-
-**Priorisation humaine:** LLM peut produire explications/rationnel pour que des annotateurs valident rapidement.
-
-**Bonne pratique:** ne pas ingérer automatiquement ; utiliser validation statistique, règles logiques, ou approbation humaine.
-
-### **11) Collaboration entre modèles sémantiques (KG) et modèles statistiques (LLM):**
-
-**.Hybridation symbolique-neuronale:** combiner robustesse et explicabilité des KG avec généralisation des LLM.
-
-**.RAG (Retrieval-Augmented Generation):** récupérer passages/KG subgraphes pertinents pour conditionner la génération LLM.
-
-**.Boucles d’auto-amélioration:** KG alimente LLM (contexte), LLM enrichit KG (extr.) — avec contrôles.
-
-**.IA plus fiable et explicable:** requêtes raisonnées via KG + narration par LLM pour auditabilité.
-
-**.Nouveaux services:** assistants sémantiques, agents autonomes qui planifient en combinant règles et génération.
-→ Ces collaborations ouvrent des applications plus intelligentes, contextualisées et traçables.
-
-### **12) Scénarios métiers prometteurs:**
-
-**.Santé:** intégration dossiers patients, recherche biomédicale (KG pour relations gènes-maladies, LLM pour extraction d’articles).
-
-**.Finance:** KG des entités économiques + LLM pour analyses de news, détection fraude, KYC.
-
-**.Supply chain / logistique:** traçabilité et raisonnement sur réseaux complexes, résolution d’incidents.
-
-**.E-commerce / recommandation:** KG produit/catégorie + LLM pour descriptions, recherche conversationnelle.
-
-**.Assistance juridique / conformité:** KG de régulations + LLM pour interprétation et réponses naturelles.
-
-**.Recherche & R&D:** découverte de connaissances (link prediction), hypothèse generation.
-
-**.Support client intelligent:** KG des produits + LLM pour dialogues multimodaux et résolutions guidées
+- Suggestion d’entités/valeurs manquantes avec contexte et score  
+- Désambiguïsation contextuelle pour lier au KG  
+- Fuzzy matching & canonicalisation : rapproche variantes textuelles vers forme canonique  
+- Génération d’attributs dérivés : descriptions, résumés, catégories  
+- Priorisation humaine : LLM propose rationnel pour validation rapide  
+
+> Bonne pratique : validation statistique, règles logiques ou approbation humaine avant ingestion automatique.
+
+### 11) Collaboration modèles sémantiques (KG) et modèles statistiques (LLM)
+
+- Hybridation symbolique-neuronale : robustesse & explicabilité du KG + généralisation des LLM  
+- RAG (Retrieval-Augmented Generation) : récupération passages / subgraphes pertinents pour LLM  
+- Boucles d’auto-amélioration : KG alimente LLM, LLM enrichit KG (extr.) avec contrôles  
+- IA plus fiable et explicable : requêtes raisonnées via KG + narration par LLM  
+- Nouveaux services : assistants sémantiques, agents autonomes combinant règles et génération
+
+### 12) Scénarios métiers prometteurs
+
+- Santé : intégration dossiers patients, recherche biomédicale (KG pour gènes-maladies, LLM pour extraction d’articles)  
+- Finance : KG des entités économiques + LLM pour analyses de news, détection fraude, KYC  
+- Supply chain / logistique : traçabilité et raisonnement sur réseaux complexes  
+- E-commerce / recommandation : KG produit/catégorie + LLM pour descriptions, recherche conversationnelle  
+- Assistance juridique / conformité : KG de régulations + LLM pour interprétation et réponses naturelles  
+- Recherche & R&D : découverte de connaissances (link prediction), hypothèses  
+- Support client intelligent : KG produits + LLM pour dialogues multimodaux et résolutions guidées
