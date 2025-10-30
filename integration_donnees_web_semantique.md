@@ -50,18 +50,20 @@ permettant :
 **.Provenance (PROV) et métadonnées :** aident à conserver origine et confiance.
 → En pratique on construit un modèle de référence (ontology / vocabulary), on mappe/transforme les sources vers RDF et on applique alignement et raisonnement.
 
-###  **5) Rôle d’un Knowledge Graph (KG) dans gestion et représentation des données intégrées:**
+###  **5) Rôle d’un Knowledge Graph (KG) dans la gestion et la représentation des données intégrées:**
+Un Knowledge Graph (KG) est un graphe représentant des entités et leurs relations, où nœuds et liens peuvent contenir des propriétés ou métadonnées.Ces principales roles sont:
 
-**.Modèle unificateur :** rassemble entités et relations provenant de sources différentes dans un graphe connecté.
+**.Modèle unificateur :** rassemble les entités et les  relations provenant de sources différentes dans un graphe connecté.
 
-**.Désambiguïsation / fusion d’entités (entity resolution) :** relie mentions hétérogènes d’un même objet.
+**.Désambiguïsation / fusion d’entités (entity resolution) :** identifie et unifie les mentions différentes d’un même objet (entity resolution)..
 
 **.Support du raisonnement :** inférences structurelles et logiques (via ontologies, règles).
 
 **.Richesse contextuelle :** stocke attributs, provenance, temporalité, confiance.
 
-**.Interface pour applications :** QA, recherche sémantique, analyses graphiques, pipelines ML.
-→ Le KG devient la « couche sémantique » entre données brutes et usages.
+**.Interface pour applications :**sert de couche sémantique pour la recherche, le question-answering, l’analyse graphique et les pipelines Machine Learning.
+
+→ le KG agit comme une couche sémantique entre données brutes et usages, facilitant intégration, cohérence et exploitation intelligente.
 
 ### **6) Pourquoi le format graphe facilite exploration & raisonnement vs bases relationnelles classiques:**
 
