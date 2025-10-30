@@ -4,7 +4,7 @@ L’hétérogénéité est l'ensemble des différences et incompatibilités entr
 Elle se manifeste à plusieurs niveaux (format, vocabulaire, granularité, représentation, qualité, etc.) et complique les requêtes, analyses et raisonnements inter-sources.
 
 
-### **2) Types d’hétérogénéités (structurale, syntaxique, sémantique)**
+### **2) Types d’hétérogénéités (structurale, syntaxique, sémantique):**
 
 **.Hétérogénéité syntaxique:**
 — différences de format ou d’encodage (CSV vs JSON vs XML, encodage UTF-8 vs ISO-8859-1).
